@@ -1,0 +1,29 @@
+{
+  "name": "hexo-filter-imgur",
+  "version": "0.0.1",
+  "description": "populate post variables from imgur gallery",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/leviwheatcroft/hexo-filter-imgur.git"
+  },
+  "keywords": [
+    "hexo",
+    "imgur",
+    "photos",
+    "gallery",
+    "filter"
+  ],
+  "author": "Levi Wheatcroft <levi@wheatcrofts.com.au> (http://leviwheatcroft.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/leviwheatcroft/hexo-filter-imgur/issues"
+  },
+  "homepage": "https://github.com/leviwheatcroft/hexo-filter-imgur#readme",
+  "dependencies": {
+    "bluebird": "^3.3.4"
+  }
+}
