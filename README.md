@@ -1,16 +1,16 @@
-## hexo-filter-imgur
+## hexo-imgur
 
-Hexo filter to populate post variables from imgur gallery. This plugin does not
-simply load an iframe, but allows you to format and style the gallery according
-to your hexo theme.
+Hexo filter and tag to populate post variables from imgur gallery. This plugin
+does not simply load an iframe, but allows you to format and style the gallery
+according to your hexo theme.
 
-### usage
-
-First install ala:
+### installation
 
     npm install hexo-filter-imgur --save
 
-You'll need an imgur key:
+### get your imgur client id
+
+You'll need an imgur client id:
 
  * go to imgur [register an application][1] page.
  * Application Name: anything
@@ -24,26 +24,91 @@ When I submitted this form (April 2016) there was some kind of server error..
 and the form said I needed an auth callback url. I just submitted a second time
 and it worked, so IDK.
 
-Then configure your _config.yml per below
+### basic usage
 
-then add `imgurAlbumKey` in the front matter for any post you want to show as
-an album.
-
-After that the filter will be run automatically when you `hexo generate`
-
-### configuration
-
-firstly you need to include the clientId you got from imgur in your _config.yml
-like so:
+First include your `clientId` in `_config.yml`.
 
 ```
 imgur:
   clientId: e5230f612bb2a1d
 ```
 
-in addition, you can list which fields you want to populate in your hexo post
-with which fields from the imgur album.
+Then insert the imgur tag in your post content:
 
+```
+{% imgur qUxdy3 %}
+```
+
+This will read the album with the key `qUxdy3` from imgur, and render it inline,
+using `templates/basic.ejs`. Depending on what theme you're using, this may not
+look that great. Post an issue here on github if your theme is broken when you
+do this.
+
+You can specify your own template if you like:
+
+```
+imgur:
+  clientId: e5230f612bb2a1d
+  galleryTemplate: themes/myAwesomeGallery.ejs
+```
+
+### advanced usage
+
+This method gives you much more control over how the gallery is rendered, but
+will require editing your theme
+
+First configure your `_config.yml`, you need to map the imgur data (key name)
+to fields in your hexo post (value), the config below includes some common
+useful fields:
+
+```
+imgur:
+  # clientId is a special case, not part of the map
+  clientId: e5230f612bb2a1d
+  # imgurKey: hexoKey
+  title: title # default
+  description: exerpt #default
+  cover: cover # default
+  imageLinks: photos # default
+  datetime: datetime
+  images: images
+```
+
+The `photos` field in hexo is commonly used by themes which expect it to
+contain a simple array of urls, the `imageLinks` key provides exactly that.
+
+The `images` key contains an array of objects which look like this:
+
+```json
+{
+  "id": "CjmMMmM",
+  "title": "Timber Beams",
+  "description": "This is a timber beam",
+  "datetime": "1 April 2016, 7:45 PM",
+  "type": "image\/jpeg",
+  "animated": false,
+  "width": 3096,
+  "height": 4128,
+  "size": 1665684,
+  "views": 853,
+  "bandwidth": 1420828452,
+  "vote": null,
+  "favorite": false,
+  "nsfw": null,
+  "section": null,
+  "account_url": null,
+  "account_id": null,
+  "comment_preview": null,
+  "link": "http:\/\/i.imgur.com\/CjmMMmM.jpg"
+}
+
+```
+
+You do not need to call the tag from your post as with "basic usage", just
+set `imgurGalleryKey` in your front matter, and then your template will have
+access to the fields you specified in your `_config.yml`.
+
+After that the filter will be run automatically when you `hexo generate`
 
 ## external references
 
