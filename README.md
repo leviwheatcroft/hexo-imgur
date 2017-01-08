@@ -1,5 +1,7 @@
 ## hexo-imgur
 
+deprecated, unpublished, delete repo january 2018
+
 Hexo filter and tag to populate post variables from imgur gallery. This plugin
 does not simply load an iframe, but allows you to format and style the gallery
 according to your hexo theme.
